@@ -1,0 +1,74 @@
+<div class="col-md-2 m-2">
+  <button class="btn btn-outline-info btn-block btn-lg add-button" (click)="showCreateForm()">
+    <i class="fa fa-plus-circle"></i> ADD
+  </button>
+</div>
+<div class="container">
+  <div class="border rounded p-4 customer-form">
+    <form [formGroup]="customerForm" *ngIf="showForm">
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field>
+            <input matInput placeholder="Name*" formControlName="name">
+          </mat-form-field>
+          <!-- <span class="error" *ngIf="createForm.get('name').touched && createForm.get('name').invalid">
+              Name is required !
+            </span> -->
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <input matInput placeholder="Contact Number*" formControlName="contactNumber">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <input matInput placeholder="Address*" formControlName="address" (keydown)="calculateRedeemAmount()">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row" *ngIf="showInEdit">
+        <div class="col-md-4">
+          <p-calendar formControlName="createdDate"></p-calendar>
+        </div>
+        <div class="col-md-4" formGroupName="electronicCard">
+          <mat-form-field>
+            <input matInput placeholder="Avalable Point*" formControlName="point">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row" formGroupName="electronicCard">
+        <div class="col-md-4">
+          <mat-form-field>
+            <input matInput placeholder="Card Number*" formControlName="number">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <input matInput placeholder="Add Point To Card" formControlName="addPoint"
+              (keyenter)="calculateAddAmount()">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4" *ngIf="showInEdit">
+          <mat-form-field>
+            <input matInput placeholder="Redeem Point From Card" formControlName="redeemPoint"
+              (keyenter)="calculatePedeemAmount()">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <button class="btn btn-outline-success btn-block btn-lg" (click)="create()" [disabled]="customerForm.invalid">
+            <i class="fa fa-save"></i> SAVE</button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-outline-primary btn-block btn-lg" (click)="clear()">
+            <i class="fa fa-retweet"></i> CLEAR</button>
+        </div>
+      </div>
+    </form>
+    <div *ngIf="!showForm">
+      <app-grid-list [cols]="cols" [records]="allCustomer" (deleteEvent)="deleteCustomerById($event)"
+        (editEvent)="editCustomer($event)" [tableType]="tableType"></app-grid-list>
+    </div>
+  </div>
+</div>

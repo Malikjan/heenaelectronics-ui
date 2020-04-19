@@ -1,0 +1,9 @@
+.login-home{
+    background-image: url(../../../../../assets/images/bg.jpg);
+    height: 625px;
+    float: left;
+}
+
+.login-right{
+    float: right;
+}

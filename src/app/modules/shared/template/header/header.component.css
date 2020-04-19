@@ -1,0 +1,20 @@
+.header{
+    background-color:rgb(100, 100, 231);
+    height: 123px;
+}
+
+.title{
+    text-align: center;
+    background-color:rgb(149, 149, 251);
+}
+
+.userName{
+    margin-top: 40px;
+    float: right;
+}
+
+a{
+    cursor: pointer;
+    color: white;
+    font-weight: inherit;
+}

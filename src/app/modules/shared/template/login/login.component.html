@@ -1,0 +1,28 @@
+<div class="login border p-4">
+  <!-- <h6> - LOGIN - </h6> -->
+  <form [formGroup]="userForm">
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <input placeholder="Email ID" class="form-control" formControlName="email">
+        <span class="error" *ngIf="userForm.get('email').invalid && userForm.get('email').touched">
+          Email is required !
+        </span>
+      </div>
+    </div>
+    <!-- <br> -->
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <input placeholder="Password" type="password" class="form-control" formControlName="password">
+        <span class="error" *ngIf="userForm.get('password').invalid && userForm.get('password').touched">
+          Password is required !
+        </span>
+      </div>
+    </div>
+  </form>
+  <!-- <br> -->
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-outline-success btn-block btn-lg" (click)="checkCurrentLoggedInUser()"> LOGIN</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.login{
+    /* width: 300px; */
+    margin-top: 180px;
+}
+
+.error{
+    color: red;
+    text-align: center;
+    margin: 110px;
+}

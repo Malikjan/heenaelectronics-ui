@@ -1,0 +1,53 @@
+<p-table #dt [columns]="cols" [value]="records" [paginator]="true" [rows]="5">
+  <ng-template pTemplate="caption">
+    <div style="text-align: right">
+      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+      <input type="text" pInputText size="50" placeholder="Global Search"
+        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+      <th *ngIf="tableType!='report'">Action</th>
+    </tr>
+    <tr>
+      <th *ngFor="let col of columns" [ngSwitch]="col.field">
+        <input *ngSwitchCase="col.field" pInputText type="text"
+          (input)="dt.filter($event.target.value, col.field, 'contains')">
+      </th>
+      <th *ngIf="tableType!='report'"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns">
+        {{rowData[col.field]}}
+      </td>
+      <td *ngIf="tableType!='report'">
+        <span style="margin: 20px;"></span>
+        <a class="pointer" pTooltip="Edit Customer" tooltipPosition="left" (click)="edit(rowData)">
+          <i class="fa fa-edit text-primary"></i>
+        </a>
+        <span style="margin: 40px;"></span>
+        <a class="pointer" pTooltip="Delete Customer" tooltipPosition="right" (click)="confirm(rowData)">
+          <i class="fa fa-trash text-danger"></i>
+        </a>
+      </td>
+    </tr>
+  </ng-template>
+  <!-- <ng-template>
+      <td>Total Number of Customers : </td>
+  </ng-template> -->
+</p-table>
+
+<!-- // Dialog After User click on Delete icon -->
+<p-confirmDialog #cd header="Delete Customer" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <button type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+  </p-footer>
+</p-confirmDialog>
